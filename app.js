@@ -9,11 +9,12 @@ const PORT = 4000;
 
 // for manage request
 app.get('/', (req, res) =>{
-    res.send("Hello Thana"); // log to localhost4000 page
+    res.send("Bello Bello"); // log to localhost4000 page
+    res.send("Bello Bello1");
 });
 
 app.use(morgan('combined'));
 
 app.listen(PORT, () =>{
-    debug("listening on port " + PORT);
+    console.log("listening on port " + PORT);
 });
