@@ -1,20 +1,26 @@
-// for run main application
+// for run main app 
 
-const express = require('express'); // defind the express
+// define express.js
+const { application } = require('express');
+const express = require('express');
 const debug = require('debug')('app');
-const morgan = require('morgan'); // middleware
+const morgan = require('morgan');
+const path = require('path');
 
 const app = express();
-const PORT = 4000;
-
-// for manage request
-app.get('/', (req, res) =>{
-    res.send("Bello Bello"); // log to localhost4000 page
-    res.send("Bello Bello1");
-});
+const port =  4000;
 
 app.use(morgan('combined'));
+// base static web
+app.use(express.static(path.join(__dirname, "/public/")));
 
-app.listen(PORT, () =>{
-    console.log("listening on port " + PORT);
+// manage request handlers
+app.get('/', (req, res) =>{
+    res.send('Hello World');
 });
+
+// app listen on PORT
+app.listen(port, () =>{
+    debug("Listening on port " + port);
+}
+);
