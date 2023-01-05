@@ -18,6 +18,9 @@ app.use(express.static(path.join(__dirname, "/public/")));
 app.set("views", "./src/views"); //set views path
 app.set("view engine", "ejs");
 
+// routing
+app.get("/products")
+
 // manage request handlers
 app.get("/", (req, res) => {
   res.render("index", {
