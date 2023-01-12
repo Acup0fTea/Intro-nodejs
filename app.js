@@ -5,13 +5,26 @@ const express = require("express");
 const debug = require("debug")("app");
 const morgan = require("morgan");
 const path = require("path");
+const mongoose = require("mongoose");
 
 
 const app = express();
 const port = process.env.PORT;
-const productsRouter = require("./src/routers/productsRoter")
+const productsRouter = require("./src/routers/productsRoter");
+const mongodb = require("./db")
 
 app.use(morgan("combined"));
+
+mongoose.Promise = global.Promise;
+mongoose.connect(mongodb.db, {
+    useNewUrlParser: true,
+    // useFindAndModify: false,
+    useUnifiedTopology: true
+}).then(() => {
+    console.log('Database successfully connected');
+}, error => {
+    console.log('Database error: ' + error);
+})
 
 // base static web
 app.use(express.static(path.join(__dirname, "/public/")));
