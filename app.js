@@ -1,15 +1,15 @@
 // for run main app
 
 // define express.js
-const { application } = require("express");
 const express = require("express");
 const debug = require("debug")("app");
 const morgan = require("morgan");
 const path = require("path");
-const productsRouter = express.Router();
+
 
 const app = express();
 const port = process.env.PORT;
+const productsRouter = require("./src/routers/productsRoter")
 
 app.use(morgan("combined"));
 
@@ -18,14 +18,6 @@ app.use(express.static(path.join(__dirname, "/public/")));
 
 app.set("views", "./src/views"); //set views path
 app.set("view engine", "ejs");
-
-productsRouter.route("/").get((req, res) =>{
-  res.send("Bello Product")
-});
-
-productsRouter.route("/1").get((req, res) =>{
-  res.send("Bello Product 1")
-});
 
 // routing
 app.use("/products", productsRouter)
